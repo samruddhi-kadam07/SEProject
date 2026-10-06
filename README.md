@@ -72,6 +72,10 @@ One-time setup (the repository must be public on the free GitHub plan):
 - One other member reviews each pull request using the checklist in `docs/test-plan.md`.
 - Everyone should commit their own work so each member appears as a contributor.
 
+## AI assistance
+
+Built with AI assistance. The code, documents and tests in this repository were drafted with Claude (Anthropic) and then reviewed, tested and submitted by the team.
+
 ## Licence
 
 MIT, see [LICENSE](LICENSE).
