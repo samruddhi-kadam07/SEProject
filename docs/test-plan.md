@@ -119,19 +119,21 @@ Coverage measured with Node's built-in coverage (`npm test`) on the final code:
 
 ## 5. Manual UI test cases
 
-Run these in a browser and record the result. **Team: fill the "Result" and "Tester" columns.**
+Run these in a browser and record the result.
+
+**How these were run:** the first full run was done by an automated browser script (Chromium driven by Playwright) against a local copy of the site on 2026-10-07, so the Tester column says "Automated". Before submission, **each team member should repeat a few of these by hand on the live site and add their own name and initials** in the Tester column, because the teacher may ask you to demonstrate them.
 
 | ID | Steps | Expected | Result | Tester |
 |---|---|---|---|---|
-| UI-01 | Enter "Maths", attended 3, held 4, click Add | Card shows 75%, badge Eligible, "Added" message | | |
-| UI-02 | Try: empty name; 41-character name; "Maths" again; attended 5 and held 2; attended -1 | Each shows a clear error, nothing added | | |
-| UI-03 | Add a subject, click Present twice and Absent once | Counts and percentage update after each click; advice text changes | | |
-| UI-04 | Add data, reload the page, then close and reopen the tab | Same subjects and threshold are shown | | |
-| UI-05 | Set minimum to 80, then to 0, 100, abc | 80 is applied and all badges recalculated; others show an error and keep 80 | | |
-| UI-06 | Click Remove then Cancel, then Remove then OK; same for Clear all | Cancel changes nothing; OK deletes | | |
-| UI-07 | Resize to 320 px wide (browser developer tools) | No sideways scrolling, buttons still usable | | |
-| UI-08 | Use only the keyboard (Tab, Enter, Space) to add and mark | Everything reachable, focus outline visible | | |
-| UI-09 | Add a subject named `<b>Test</b>` | Shown as plain text, not bold | | |
+| UI-01 | Enter "Maths", attended 3, held 4, click Add | Card shows 75%, badge Eligible, "Added" message | Pass | Automated (Chromium) |
+| UI-02 | Try: empty name; 41-character name; "Maths" again; attended 5 and held 2; attended -1 | Each shows a clear error, nothing added | Pass. The name box also stops at 40 characters in the browser (maxlength), so a 41st character cannot be typed | Automated (Chromium) |
+| UI-03 | Add a subject, click Present twice and Absent once | Counts and percentage update after each click; advice text changes | Pass. 3 of 4 then Present, Present, Absent gave 5 of 7, 71.43%, At risk | Automated (Chromium) |
+| UI-04 | Add data, reload the page, then close and reopen the tab | Same subjects and threshold are shown | Pass, also in a new tab | Automated (Chromium) |
+| UI-05 | Set minimum to 80, then to 0, 100, abc | 80 is applied and all badges recalculated; others show an error and keep 80 | Pass. Blank, 0 and 100 are rejected; abc cannot be typed in a number box | Automated (Chromium) |
+| UI-06 | Click Remove then Cancel, then Remove then OK; same for Clear all | Cancel changes nothing; OK deletes | Pass | Automated (Chromium) |
+| UI-07 | Resize to 320 px wide (browser developer tools) | No sideways scrolling, buttons still usable | Pass at 320, 375, 768 and 1280 px, no sideways scroll | Automated (Chromium) |
+| UI-08 | Use only the keyboard (Tab, Enter, Space) to add and mark | Everything reachable, focus outline visible | Pass. Subject added with Enter, Present marked with Space, focus outline visible | Automated (Chromium) |
+| UI-09 | Add a subject named `<b>Test</b>` | Shown as plain text, not bold | Pass. Shown as text, no script ran | Automated (Chromium) |
 
 ## 6. Inspection (code review) checklist
 
@@ -149,6 +151,7 @@ Reviewer ticks each item on every pull request:
 
 | ID | Description | Found in | Severity | Status |
 |---|---|---|---|---|
-| | | | | |
+| DEF-01 | The page had no favicon, so the browser requested `/favicon.ico` and the server answered 404 (a console error on every page load). | UI test run (console check) | Low | Fixed: inline icon added to `index.html` |
+| OBS-01 | Observation, not a defect: pasting a 41-character name is silently shortened to 40 by the browser, with no message. Business-rule limit is still tested in TC-28. | UI-02 | Low | Open, accepted for v1.0; could add a character counter later |
 
 (Use GitHub Issues with the `bug` label and copy the summary here before submission.)
