@@ -1,0 +1,10 @@
+{
+  "name": "attendance-tracker",
+  "version": "1.0.0",
+  "description": "Subject-wise attendance tracker with exam eligibility check (Software Engineering PBL project).",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "test": "node --test --experimental-test-coverage"
+  }
+}
