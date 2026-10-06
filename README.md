@@ -75,3 +75,4 @@ One-time setup (the repository must be public on the free GitHub plan):
 ## Licence
 
 MIT, see [LICENSE](LICENSE).
+Attendance Tracker Project
